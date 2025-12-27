@@ -1,0 +1,22 @@
+root = true
+
+# 所有文件通用配置
+[*]
+charset = utf-8
+indent_style = space
+indent_size = 2
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+# 前端代码文件
+[*.{js,ts,vue}]
+indent_size = 2
+
+# JSON 文件
+[*.json]
+indent_size = 2
+
+# Markdown 文件
+[*.md]
+trim_trailing_whitespace = false
