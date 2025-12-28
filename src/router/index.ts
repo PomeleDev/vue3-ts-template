@@ -4,7 +4,7 @@ const routes: RouteRecordRaw[] = [
   {
     path: "/",
     name: "Home",
-    component: () => import("../views/HomePage.vue"),
+    component: () => import("@/views/HomePage.vue"),
     // redirect: "/about",
     // children: [
     //   {
@@ -17,13 +17,13 @@ const routes: RouteRecordRaw[] = [
   {
     path: "/about",
     name: "About",
-    component: () => import("../views/AboutPage.vue"),
+    component: () => import("@/views/AboutPage.vue"),
   },
 ];
 
 const router = createRouter({
-  history: createWebHistory(),
-  routes,
+  history: createWebHistory(), // 路由模式
+  routes, // 路由表
 });
 
 export default router;
