@@ -5,12 +5,28 @@ import pluginVue from "eslint-plugin-vue"; // 推荐的vue规范
 import { defineConfig } from "eslint/config";
 import prettierRecommended from "eslint-plugin-prettier/recommended"; // 格式化
 
+// 1
+// import autoImport from "./.eslintrc-auto-import.json" with { type: "json" };
+
+// 2
+import { createRequire } from "module";
+const require = createRequire(import.meta.url);
+const autoImport = require("./.eslintrc-auto-import.json");
+
+// 3.fs.readFile
+
 export default defineConfig([
   {
     files: ["**/*.{js,mjs,cjs,ts,mts,cts,vue}"],
     plugins: { js },
     extends: ["js/recommended"],
-    languageOptions: { globals: { ...globals.browser, ...globals.node } },
+    languageOptions: {
+      globals: {
+        ...globals.browser,
+        ...globals.node,
+        ...autoImport.globals,
+      },
+    },
   },
   tseslint.configs.recommended,
   pluginVue.configs["flat/essential"],

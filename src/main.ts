@@ -4,8 +4,8 @@ import { createApp } from "vue";
 import { createPinia } from "pinia";
 
 // 导入 element-plus 样式
-import ElementPlus from "element-plus";
-import "element-plus/dist/index.css";
+// import ElementPlus from "element-plus";
+// import "element-plus/dist/index.css";
 
 import "normalize.css/normalize.css"; // 清除默认样式
 import "uno.css"; // 导入 UnoCSS
@@ -14,4 +14,7 @@ import "@/style/index.scss"; // 加载全局样式
 const app = createApp(App);
 const pinia = createPinia();
 
-app.use(router).use(pinia).use(ElementPlus).mount("#app");
+app.use(router);
+app.use(pinia);
+// app.use(ElementPlus);
+app.mount("#app");
