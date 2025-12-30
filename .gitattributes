@@ -1,0 +1,12 @@
+# 所有文件默认使用LF换行符
+* text=auto eol=lf
+
+# 二进制文件不处理换行符
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.svg binary
+*.woff binary
+*.woff2 binary
