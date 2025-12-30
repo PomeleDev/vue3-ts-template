@@ -24,7 +24,9 @@ export default defineConfig([
   },
   {
     // 自定义规则
-    rules: {},
+    rules: {
+      "vue/multi-word-component-names": "off",
+    },
   },
   prettierRecommended, // 覆盖eslint的规范
 ]);
