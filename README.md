@@ -5,18 +5,21 @@
 ## ✨ 核心特性
 
 ### 🎨 UI & 样式
+
 - **UnoCSS**: 原子化 CSS 引擎，支持属性化写法
 - **Element Plus**: 企业级 Vue 组件库，按需自动导入
 - **Sass**: 强大的 CSS 预处理器
 - **Normalize.css**: 统一的浏览器样式重置
 
 ### 🔧 开发体验
+
 - **TypeScript**: 完整的类型支持
 - **ESLint + Prettier**: 代码规范和自动格式化
 - **Husky + Commitlint**: Git 提交规范检查
 - **自动导入**: API 和组件自动导入，提升开发效率
 
 ### 🏗️ 架构设计
+
 - **Pinia**: 现代化的状态管理
 - **Vue Router**: 基于文件的路由系统
 - **插件系统**: 可扩展的插件架构
@@ -25,26 +28,31 @@
 ## 📦 技术栈
 
 ### 核心框架
+
 - **Vue 3.5** - 渐进式 JavaScript 框架
 - **TypeScript 5.9** - 类型安全的 JavaScript 超集
 - **Vite 7.2** - 下一代前端构建工具
 
 ### UI & 样式
+
 - **UnoCSS 66.5** - 原子化 CSS 引擎
 - **Element Plus 2.13** - Vue 3 组件库
 - **Sass 1.97** - CSS 预处理器
 
 ### 状态 & 路由
+
 - **Pinia 3.0** - Vue 3 官方状态管理
 - **Vue Router 4.6** - Vue 3 官方路由
 
 ### 开发工具
+
 - **ESLint 9.39** - JavaScript/TypeScript 代码检查
 - **Prettier 3.7** - 代码格式化
 - **Husky 9.1** - Git 钩子
 - **Commitlint** - 提交信息规范
 
 ### 自动化工具
+
 - **unplugin-auto-import** - API 自动导入
 - **unplugin-vue-components** - 组件自动导入
 - **lint-staged** - 提交前代码检查
@@ -131,14 +139,10 @@ pnpm lint:fix
 ```vue
 <template>
   <!-- 传统类名 -->
-  <div class="text-red bg-blue-100 p-4 rounded">
-    传统写法
-  </div>
+  <div class="text-red bg-blue-100 p-4 rounded">传统写法</div>
 
   <!-- 属性化写法 -->
-  <div text-red bg="blue-100" p="4" rounded>
-    属性化写法
-  </div>
+  <div text-red bg="blue-100" p="4" rounded>属性化写法</div>
 </template>
 
 <style lang="scss" scoped>
@@ -155,24 +159,24 @@ pnpm lint:fix
 
 ```typescript
 // stores/counter.ts
-import { defineStore } from 'pinia'
-import { ref } from 'vue'
+import { defineStore } from "pinia";
+import { ref } from "vue";
 
-export const useCounterStore = defineStore('counter', () => {
-  const count = ref(0)
+export const useCounterStore = defineStore("counter", () => {
+  const count = ref(0);
 
   const increment = () => {
-    count.value++
-  }
+    count.value++;
+  };
 
-  return { count, increment }
-})
+  return { count, increment };
+});
 ```
 
 ```vue
 <script setup>
 // 自动导入，无需手动导入
-const counterStore = useCounterStore()
+const counterStore = useCounterStore();
 </script>
 ```
 
@@ -184,17 +188,17 @@ const counterStore = useCounterStore()
 // router/index.ts
 const routes: RouteRecordRaw[] = [
   {
-    path: '/',
+    path: "/",
     component: Layout,
-    redirect: '/overview',
+    redirect: "/overview",
     children: [
       {
-        path: 'overview',
-        component: () => import('@/views/Overview/index.vue')
-      }
-    ]
-  }
-]
+        path: "overview",
+        component: () => import("@/views/Overview/index.vue"),
+      },
+    ],
+  },
+];
 ```
 
 ### 🔌 插件系统
@@ -229,8 +233,8 @@ import { defineConfig, uno, presetAttributify, transformerDirectives } from "uno
 
 export default defineConfig({
   presets: [
-    uno,                    // 核心 preset
-    presetAttributify(),    // 属性化写法支持
+    uno, // 核心 preset
+    presetAttributify(), // 属性化写法支持
   ],
   transformers: [
     transformerDirectives(), // @apply 支持
