@@ -1,5 +1,7 @@
 <template>
   仪表盘
+  <div i-ant-design:apple-filled inline-block w-1em h-1em align-middle></div>
+  <div icon i-ant-design:apple-filled></div>
   <el-button @click="handleClick">你好</el-button>
   <HelloWorld msg="hello" />
 </template>
