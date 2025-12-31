@@ -25,7 +25,7 @@
     "@commitlint/cli": "^20.2.0",
     "@commitlint/config-conventional": "^20.2.0",
     "@eslint/js": "^9.39.2",
-    "@iconify-json/ant-design": "^1.2.5",
+    "@iconify/vue": "^5.0.0",
     "@types/node": "^24.10.1",
     "@unocss/preset-attributify": "^66.5.11",
     "@unocss/preset-icons": "^66.5.11",
