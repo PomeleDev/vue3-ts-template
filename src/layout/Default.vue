@@ -1,9 +1,12 @@
 <template>
   <div class="app-wrapper">
-    <div class="sidebar-container">侧边菜单栏</div>
+    <div class="sidebar-container">
+      <sidebar />
+    </div>
     <div class="main-container">
       <div class="header">
-        <div class="navbar">顶部导航</div>
+        <!-- 顶部导航栏 -->
+        <navbar />
         <div class="tags-view">标签页</div>
       </div>
       <div class="app-main">
@@ -12,12 +15,15 @@
     </div>
   </div>
 </template>
-<style lang="scss">
+<style lang="scss" scoped>
 .app-wrapper {
   @apply flex w-full h-full;
 
   .sidebar-container {
-    @apply bg-red w-[var(--sidebar-width)];
+    // 跨组件设置样式
+    :deep(.sidebar-container-menu:not(.el-menu--collapse)) {
+      @apply w-[var(--sidebar-width)];
+    }
   }
   .main-container {
     @apply flex flex-col flex-1;
@@ -25,9 +31,6 @@
 
   .header {
     @apply h-84px;
-    .navbar {
-      @apply h-[var(--narbar-heigh)] bg-yellow;
-    }
 
     .tags-view {
       @apply h-[var(--tagsview-height)] bg-blue;

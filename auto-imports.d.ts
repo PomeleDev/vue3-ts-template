@@ -6,8 +6,11 @@
 // biome-ignore lint: disable
 export {}
 declare global {
+  const Boolean: typeof import('@element-plus/icons-vue').Boolean
   const EffectScope: typeof import('vue').EffectScope
   const ElMessage: typeof import("element-plus/es").ElMessage
+  const Object: typeof import('@element-plus/icons-vue').Object
+  const String: typeof import('@element-plus/icons-vue').String
   const acceptHMRUpdate: typeof import('pinia').acceptHMRUpdate
   const computed: typeof import('vue').computed
   const createApp: typeof import('vue').createApp

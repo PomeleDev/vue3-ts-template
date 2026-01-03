@@ -3,6 +3,8 @@ import router from "./router";
 import { createApp } from "vue";
 import { createPinia } from "pinia";
 
+import piniaPluginPersistedstate from "pinia-plugin-persistedstate";
+
 // 导入 element-plus 样式
 // import ElementPlus from "element-plus";
 // import "element-plus/dist/index.css";
@@ -14,6 +16,8 @@ import "@/style/index.scss"; // 加载全局样式
 
 const app = createApp(App);
 const pinia = createPinia();
+
+pinia.use(piniaPluginPersistedstate); // 安装持久化插件
 
 app.use(router);
 app.use(pinia);
