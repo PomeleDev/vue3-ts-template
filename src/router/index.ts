@@ -24,7 +24,7 @@ const asyncRoutes: RouteRecordRaw[] = [
   {
     path: "/documentation",
     component: Layout,
-    redirect: "/documentation",
+    redirect: "/documentation/index",
     children: [
       {
         path: "index",
@@ -44,7 +44,7 @@ const asyncRoutes: RouteRecordRaw[] = [
     children: [
       {
         path: "index",
-        name: "Guide",
+        name: "guide",
         component: () => import("@/views/System/user.vue"),
         meta: {
           icon: "ant-design:car-twotone",
@@ -60,6 +60,9 @@ const asyncRoutes: RouteRecordRaw[] = [
     meta: {
       icon: "ant-design:unlock-filled",
       title: "system",
+      alwaysShow: true,
+      // breadcrumb: false,
+      // 作为父文件夹一直显示
     },
     children: [
       {
@@ -71,22 +74,36 @@ const asyncRoutes: RouteRecordRaw[] = [
           title: "menu",
         },
       },
+      // {
+      //   path: "user",
+      //   name: "user",
+      //   component: () => import("@/views/System/user.vue"),
+      //   meta: {
+      //     icon: "ant-design:unlock-filled",
+      //     title: "user",
+      //   },
+      // },
+      // {
+      //   path: "role",
+      //   name: "role",
+      //   component: () => import("@/views/System/role.vue"),
+      //   meta: {
+      //     icon: "ant-design:unlock-filled",
+      //     title: "role",
+      //   },
+      // },
+    ],
+  },
+  {
+    path: "/external-link",
+    component: Layout,
+    children: [
       {
-        path: "user",
-        name: "user",
-        component: () => import("@/views/System/user.vue"),
+        path: "http://www.baidu.com",
+        redirect: "/",
         meta: {
-          icon: "ant-design:unlock-filled",
-          title: "user",
-        },
-      },
-      {
-        path: "role",
-        name: "role",
-        component: () => import("@/views/System/role.vue"),
-        meta: {
-          icon: "ant-design:unlock-filled",
-          title: "role",
+          icon: "ant-design:link-outlined",
+          title: "link Baidu",
         },
       },
     ],

@@ -2,7 +2,13 @@
   "extends": "@vue/tsconfig/tsconfig.dom.json",
   "compilerOptions": {
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
-    "types": ["vite/client", "element-plus/global", "./auto-imports.d.ts", "./components.d.ts"],
+    "types": [
+      "vite/client",
+      "element-plus/global",
+      "./auto-imports.d.ts",
+      "./components.d.ts",
+      "./types.d.ts"
+    ],
 
     "baseUrl": ".",
     "paths": {

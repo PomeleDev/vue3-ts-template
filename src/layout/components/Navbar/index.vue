@@ -1,6 +1,16 @@
 <template>
-  <div class="navbar">
+  <div class="navbar" flex>
     <Hamburger @toggleCollapse="toggleSidebar" :collapse="sidebar.opened" />
+    <breadcrumb></breadcrumb>
+
+    <div flex justify-end flex-1 items-center mr-20px>
+      <screenfull mx-5px></screenfull>
+      <el-tooltip content="ChangeSize" placement="bottom">
+        <size-select></size-select>
+      </el-tooltip>
+
+      <avatar></avatar>
+    </div>
   </div>
 </template>
 <style lang="scss" scoped>

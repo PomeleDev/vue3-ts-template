@@ -9,9 +9,7 @@
         <navbar />
         <div class="tags-view">标签页</div>
       </div>
-      <div class="app-main">
-        <router-view />
-      </div>
+      <app-main />
     </div>
   </div>
 </template>
@@ -21,6 +19,7 @@
 
   .sidebar-container {
     // 跨组件设置样式
+    @apply bg-[var(--menu-bg)];
     :deep(.sidebar-container-menu:not(.el-menu--collapse)) {
       @apply w-[var(--sidebar-width)];
     }
@@ -35,11 +34,6 @@
     .tags-view {
       @apply h-[var(--tagsview-height)] bg-blue;
     }
-  }
-
-  .app-main {
-    @apply bg-cyan;
-    min-height: calc(100vh - calc(var(--narbar-heigh) + var(--tagsview-height)));
   }
 }
 </style>
