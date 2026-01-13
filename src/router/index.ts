@@ -14,7 +14,23 @@ export const constantRoutes: RouteRecordRaw[] = [
         meta: {
           icon: "ant-design:bank-outlined",
           title: "仪表盘",
+          affix: true, // 是否固定在标签页中
+          // noCache: true, // 是否缓存
         },
+      },
+    ],
+  },
+  {
+    path: "/redirect",
+    component: Layout,
+    meta: {
+      hidden: true,
+    },
+    // 当跳转到 /redirect/a/b/c/d?query=1
+    children: [
+      {
+        path: "/redirect/:path(.*)",
+        component: () => import("@/views/Redirect/index.vue"),
       },
     ],
   },
@@ -74,24 +90,24 @@ const asyncRoutes: RouteRecordRaw[] = [
           title: "menu",
         },
       },
-      // {
-      //   path: "user",
-      //   name: "user",
-      //   component: () => import("@/views/System/user.vue"),
-      //   meta: {
-      //     icon: "ant-design:unlock-filled",
-      //     title: "user",
-      //   },
-      // },
-      // {
-      //   path: "role",
-      //   name: "role",
-      //   component: () => import("@/views/System/role.vue"),
-      //   meta: {
-      //     icon: "ant-design:unlock-filled",
-      //     title: "role",
-      //   },
-      // },
+      {
+        path: "user",
+        name: "user",
+        component: () => import("@/views/System/user.vue"),
+        meta: {
+          icon: "ant-design:unlock-filled",
+          title: "user",
+        },
+      },
+      {
+        path: "role",
+        name: "role",
+        component: () => import("@/views/System/role.vue"),
+        meta: {
+          icon: "ant-design:unlock-filled",
+          title: "role",
+        },
+      },
     ],
   },
   {

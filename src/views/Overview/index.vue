@@ -23,6 +23,9 @@
 <script lang="ts" setup>
 import { useAppStore } from "@/stores/app";
 
+defineOptions({
+  name: "overview",
+});
 // 将服务型组件 通过实例调用
 const { proxy } = getCurrentInstance()!;
 

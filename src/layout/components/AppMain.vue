@@ -2,14 +2,19 @@
   <div class="app-main">
     <router-view v-slot="{ Component }">
       <transition name="fade">
-        <keep-alive>
+        <keep-alive :include="inclueds">
           <component :is="Component" :key="$route.path"></component>
         </keep-alive>
       </transition>
     </router-view>
   </div>
 </template>
+<script lang="ts" setup>
+import { useTagsView } from "@/stores/tagsView";
 
+const store = useTagsView();
+const inclueds = computed(() => store.cacheViews as string[]);
+</script>
 <style lang="scss">
 .app-main {
   @apply bg-cyan overflow-hidden pos-relative;

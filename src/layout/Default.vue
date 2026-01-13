@@ -7,7 +7,7 @@
       <div class="header">
         <!-- 顶部导航栏 -->
         <navbar />
-        <div class="tags-view">标签页</div>
+        <tags-view />
       </div>
       <app-main />
     </div>
@@ -25,15 +25,11 @@
     }
   }
   .main-container {
-    @apply flex flex-col flex-1;
+    @apply flex flex-col flex-1 overflow-hidden;
   }
 
   .header {
     @apply h-84px;
-
-    .tags-view {
-      @apply h-[var(--tagsview-height)] bg-blue;
-    }
   }
 }
 </style>
