@@ -14,6 +14,8 @@ import "normalize.css/normalize.css"; // 清除默认样式
 import "uno.css"; // 导入 UnoCSS
 import "@/style/index.scss"; // 加载全局样式
 
+import "./permission";
+
 const app = createApp(App);
 const pinia = createPinia();
 

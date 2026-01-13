@@ -1,12 +1,12 @@
 <template>
   <div class="login-container">
-    <el-form class="login-form" ref="loginForm" :rules="loginRules" :model="loginForm">
+    <el-form class="login-form" ref="form" :rules="loginRules" :model="loginForm">
       <div class="admin-logo">
         <img class="logo" src="../../assets/vue.svg" alt="logo" size-80px />
         <h1 class="name">Vue3 Admin</h1>
       </div>
       <el-form-item prop="username">
-        <el-input placeholder="请输入用户名" v-model="loginState.loginForm.username">
+        <el-input placeholder="请输入用户名" v-model="loginForm.username">
           <template #prepend>
             <span class="svg-container">
               <svg-icon icon-name="ant-design:user-outlined"></svg-icon>
@@ -20,7 +20,7 @@
           placeholder="请输入密码"
           autocomplete="on"
           show-password
-          v-model="loginState.loginForm.password"
+          v-model="loginForm.password"
           prop="password"
         >
           <template #prepend>
@@ -40,7 +40,11 @@
 <script lang="ts" setup>
 import { useUserStore } from "@/stores/user";
 import type { FormInstance } from "element-plus";
+import { useRouteQuery } from "@/hooks/useRouteQuery";
 const { login } = useUserStore();
+
+const router = useRouter();
+const { redirect, otherQuery } = useRouteQuery();
 
 const loginState = reactive({
   loginForm: {
@@ -48,19 +52,20 @@ const loginState = reactive({
     password: "",
   },
   loginRules: {
-    userame: [{ required: true, trigger: "blur", message: "请输入用户名" }],
+    username: [{ required: true, trigger: "blur", message: "请输入用户名" }],
     password: [{ required: true, trigger: "blur", message: "请输入密码" }],
   },
 });
-const loginFormInstance = useTemplateRef<FormInstance>("loginForm");
+const loginFormInstance = useTemplateRef<FormInstance>("form");
 const { loginForm, loginRules } = loginState;
 
 const handleLogin = () => {
   loginFormInstance.value?.validate(async (valid) => {
     if (valid) {
-      let r = await login(loginForm);
-      console.log(valid);
-      console.log(r);
+      await login(loginForm);
+
+      // 解析出一个重定向的路径  + 其他的查询参数
+      router.push({ path: redirect.value || "/", query: otherQuery.value });
     }
   });
 };

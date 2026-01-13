@@ -1,3 +1,4 @@
+import { useUserStore } from "@/stores/user";
 import { getToken } from "@/utils/auth";
 import axios from "axios";
 import { ElMessage } from "element-plus";
@@ -18,6 +19,13 @@ service.interceptors.request.use(
     return config;
   },
   (err) => {
+    const store = useUserStore();
+    const res = err.response;
+    if (res.status === 401) {
+      // 说明token不正确，
+      store.logout(); // 移除token
+      window.location.reload();
+    }
     return Promise.reject(err);
   }
 );

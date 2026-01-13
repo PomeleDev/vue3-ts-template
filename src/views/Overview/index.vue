@@ -40,4 +40,9 @@ const val = ref("bg-gray");
 setTimeout(() => {
   val.value = "bg-white";
 }, 1000);
+
+// role ->  user
+// role -> 菜单权限
+
+// 后台管理系统  登录权限，接口权限，页面权限，菜单权限 ，按钮权限
 </script>

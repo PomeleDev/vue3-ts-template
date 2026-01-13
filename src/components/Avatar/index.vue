@@ -10,7 +10,7 @@
           <el-dropdown-item>个人设置</el-dropdown-item>
         </router-link>
         <el-dropdown-item divided @click="logout">
-          <span block>退出登录</span>
+          <span block @click="logout">退出登录</span>
         </el-dropdown-item>
       </el-dropdown-menu>
     </template>
@@ -19,7 +19,13 @@
 
 <script lang="ts" setup>
 import avatar from "@/assets/vue.svg";
+import { useUserStore } from "@/stores/user";
+const store = useUserStore();
+const { proxy } = getCurrentInstance()!;
+
 const logout = () => {
-  console.log("退出登录");
+  store.logout();
+  proxy?.$message.success("退出成功");
+  window.location.reload();
 };
 </script>

@@ -1,10 +1,13 @@
 import type { IUserLoginData } from "@/api/user";
 import { login as loginApi } from "@/api/user";
-import { setToken } from "@/utils/auth";
+import { setToken, removeToken } from "@/utils/auth";
+import { useTagsView } from "./tagsView";
 export const useUserStore = defineStore("user", () => {
   const state = reactive({
     token: "",
   });
+  const tagsViewStore = useTagsView();
+
   const login = async (userInfo: IUserLoginData) => {
     try {
       const { username, password } = userInfo;
@@ -16,5 +19,11 @@ export const useUserStore = defineStore("user", () => {
       return Promise.reject(e);
     }
   };
-  return { login, state };
+  const logout = () => {
+    state.token = "";
+    removeToken();
+    // 所有的信息都应该情况
+    tagsViewStore.delAllView(); // ...
+  };
+  return { login, state, logout };
 });

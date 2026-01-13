@@ -1,4 +1,4 @@
-export interface ApiReponse<T = unknown> {
+export interface ApiResponse<T = unknown> {
   code: number;
   data: T;
   message?: string;

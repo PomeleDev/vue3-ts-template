@@ -69,7 +69,7 @@ const asyncRoutes: RouteRecordRaw[] = [
       {
         path: "index",
         name: "guide",
-        component: () => import("@/views/System/user.vue"),
+        component: () => import("@/views/System/User/index.vue"),
         meta: {
           icon: "ant-design:car-twotone",
           title: "guite",
@@ -92,7 +92,7 @@ const asyncRoutes: RouteRecordRaw[] = [
       {
         path: "menu",
         name: "menu",
-        component: () => import("@/views/System/menu.vue"),
+        component: () => import("@/views/System/Menu/index.vue"),
         meta: {
           icon: "ant-design:unlock-filled",
           title: "menu",
@@ -101,7 +101,7 @@ const asyncRoutes: RouteRecordRaw[] = [
       {
         path: "user",
         name: "user",
-        component: () => import("@/views/System/user.vue"),
+        component: () => import("@/views/System/User/index.vue"),
         meta: {
           icon: "ant-design:unlock-filled",
           title: "user",
@@ -110,7 +110,7 @@ const asyncRoutes: RouteRecordRaw[] = [
       {
         path: "role",
         name: "role",
-        component: () => import("@/views/System/role.vue"),
+        component: () => import("@/views/System/Role/index.vue"),
         meta: {
           icon: "ant-design:unlock-filled",
           title: "role",

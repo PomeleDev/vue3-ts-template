@@ -16,6 +16,7 @@ declare module 'vue' {
     Breadcrumb: typeof import('./src/layout/components/Breadcrumb/index.vue')['default']
     copy: typeof import('./src/layout/components/Sidebar/SidebarItemLink copy.vue')['default']
     Default: typeof import('./src/layout/Default.vue')['default']
+    EditorRole: typeof import('./src/views/System/Role/components/editor-role.vue')['default']
     ElBreadcrumb: typeof import('element-plus/es')['ElBreadcrumb']
     ElBreadcrumbItem: typeof import('element-plus/es')['ElBreadcrumbItem']
     ElButton: typeof import('element-plus/es')['ElButton']

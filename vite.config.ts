@@ -24,7 +24,7 @@ export default defineConfig({
       // 解析组件
       resolvers: [ElementPlusResolver()],
       // 所有的组件自动加载
-      dirs: ["src/components", "src/layout/components"],
+      dirs: ["src/components", "src/layout/components", "src/views/**/components"],
     }),
     ElementPlus({}),
   ],
