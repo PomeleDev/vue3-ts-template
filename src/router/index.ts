@@ -15,7 +15,7 @@ export const constantRoutes: RouteRecordRaw[] = [
           icon: "ant-design:bank-outlined",
           title: "仪表盘",
           affix: true, // 是否固定在标签页中
-          // noCache: true, // 是否缓存
+          noCache: true, // 不需要缓存
         },
       },
     ],
@@ -33,6 +33,14 @@ export const constantRoutes: RouteRecordRaw[] = [
         component: () => import("@/views/Redirect/index.vue"),
       },
     ],
+  },
+  {
+    path: "/login",
+    name: "Login",
+    meta: {
+      hidden: true,
+    },
+    component: () => import("@/views/Login/index.vue"),
   },
 ];
 

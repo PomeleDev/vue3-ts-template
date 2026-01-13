@@ -10,6 +10,8 @@ const { deleteView, addView, delAllView, deleteOtherView, deleteCacheView } = st
 const { visitedViews } = storeToRefs(store);
 
 import { routes } from "@/router/index";
+import { useSettingStore } from "@/stores/settings";
+
 const router = useRouter();
 const route = useRoute();
 const isActive = (tag: RouteLocationNormalized) => {
@@ -108,6 +110,8 @@ const handleCommand = (command: CommandType, view: RouteLocationNormalized) => {
       break;
   }
 };
+const settingsStore = useSettingStore();
+const theme = computed(() => settingsStore.settings.theme);
 </script>
 
 <template>
@@ -118,6 +122,10 @@ const handleCommand = (command: CommandType, view: RouteLocationNormalized) => {
         v-for="(tag, index) in visitedViews"
         :class="{
           active: isActive(tag),
+        }"
+        :style="{
+          backgroundColor: isActive(tag) ? theme : '',
+          borderColor: isActive(tag) ? theme : '',
         }"
         :key="index"
         :to="{ path: tag.path, query: tag.query }"
@@ -156,7 +164,7 @@ const handleCommand = (command: CommandType, view: RouteLocationNormalized) => {
 .tags-view-item {
   @apply inline-block h-28px leading-28px border-solid border-gray px-3px mx-3px box-border text-black;
   &.active {
-    @apply bg-green text-white border-none;
+    @apply text-white border-none;
     &::before {
       content: "";
       @apply inline-block w-8px h-8px rounded-full  bg-white mr-3px;

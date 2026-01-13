@@ -7,7 +7,7 @@ export const useTagsView = defineStore("tagsView", () => {
   const addView = (view: RouteLocationNormalizedLoaded) => {
     // 当前添加的视图是否已经存储过，存储过则不在添加
     const exits = visitedViews.value.some((v) => v.path === view.path);
-    addCacheView(view); // 是否需要添加到缓存中
+    addCacheView(view); // 有可能刚刚清除缓存了，我们在这里重新添加下
     if (exits) return;
     const newView = {
       ...view,

@@ -8,8 +8,12 @@
 import { useAppStore } from "./stores/app";
 import en from "element-plus/dist/locale/en.mjs";
 import zhCn from "element-plus/dist/locale/zh-cn.mjs";
+import { useGenerateTheme } from "@/hooks/useGenerateTheme";
+
 const language = ref("zh-cn");
 const locale = computed(() => (language.value === "zh-cn" ? zhCn : en));
 
 const store = useAppStore();
+
+useGenerateTheme();
 </script>

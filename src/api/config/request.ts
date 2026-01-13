@@ -1,0 +1,40 @@
+import { getToken } from "@/utils/auth";
+import axios from "axios";
+import { ElMessage } from "element-plus";
+
+const config = {
+  baseURL: import.meta.env.VITE_BASE_API,
+  timeout: 3000,
+};
+
+const service = axios.create(config);
+
+service.interceptors.request.use(
+  (config) => {
+    const token = getToken();
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (err) => {
+    return Promise.reject(err);
+  }
+);
+
+service.interceptors.response.use(
+  (response) => {
+    // code
+    const { code, message } = response.data;
+    if (code !== 0) {
+      ElMessage.error(message);
+      return Promise.reject(message);
+    }
+    return response.data;
+  },
+  (err) => {
+    return Promise.reject(err);
+  }
+);
+
+export default service;

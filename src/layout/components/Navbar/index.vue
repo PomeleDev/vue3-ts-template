@@ -9,6 +9,12 @@
         <size-select></size-select>
       </el-tooltip>
 
+      <svg-icon
+        icon-name="ant-design:setting-outlined"
+        size-2em
+        @click="openShowSetting"
+      ></svg-icon>
+
       <avatar></avatar>
     </div>
   </div>
@@ -27,4 +33,12 @@ const { sidebar, toggleSidebar } = useAppStore();
 // const handleCollapse = () => {
 //   collapse.value = !collapse.value;
 // };
+
+const emit = defineEmits<{
+  (event: "showSetting", isShow: boolean): void;
+}>();
+
+const openShowSetting = () => {
+  emit("showSetting", true);
+};
 </script>
