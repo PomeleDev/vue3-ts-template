@@ -26,3 +26,43 @@ export interface ILoginResponseData {
 export const login = (data: IUserLoginData): Promise<ApiResponse<ILoginResponseData>> => {
   return request.post("/auth/login", data);
 };
+
+export interface IUsers {
+  users: Profile[];
+  count: number;
+}
+// 查询参数
+export interface IUserQuery {
+  pageNum?: number;
+  pageSize?: number;
+  mobile?: string;
+  status?: boolean;
+  username?: string;
+}
+
+// 获取用户列表的接口
+export const getUsers = (params: IUserQuery): Promise<ApiResponse<IUsers>> => {
+  const { pageNum = 0, pageSize = 10, username = "", status, mobile = "" } = params;
+  return request.get("/user", {
+    params: {
+      pageNum,
+      pageSize,
+      username,
+      status,
+      mobile,
+    },
+  });
+};
+
+// 删除用户
+export const removeUser = (id: number): Promise<ApiResponse> => {
+  return request.delete(`/user/${id}`);
+};
+// 添加用户
+export const addUser = (data: Profile): Promise<ApiResponse> => {
+  return request.post("/auth/register", data);
+};
+// 编辑用户
+export const updateUser = (id: number, data: Profile): Promise<ApiResponse> => {
+  return request.put(`/user/${id}`, data);
+};

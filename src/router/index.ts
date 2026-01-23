@@ -134,6 +134,7 @@ const asyncRoutes: RouteRecordRaw[] = [
   },
 ];
 
+// 需要根据用户赋予的权限来动态添加异步路由
 export const routes: RouteRecordRaw[] = [...constantRoutes, ...asyncRoutes];
 
 export default createRouter({
