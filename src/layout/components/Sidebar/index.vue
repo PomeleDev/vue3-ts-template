@@ -11,12 +11,7 @@
       :active-text-color="theme"
       :collapse="sidebar.opened"
     >
-      <sidebar-item
-        v-for="route in routes"
-        :key="route.path"
-        :item="route"
-        :base-path="route.path"
-      />
+      <sidebar-item v-for="route in menuRoutes" :key="route.path" :item="route" />
       <!-- 增加父路径，用于el-menu-item渲染的时候拼接 -->
     </el-menu>
   </div>
@@ -24,8 +19,12 @@
 <script lang="ts" setup>
 import { useAppStore } from "@/stores/app";
 import variables from "@/style/variables.module.scss";
-import { routes } from "@/router";
 import { useSettingStore } from "@/stores/settings";
+import { useMenuStore } from "@/stores/menu";
+
+const meuStore = useMenuStore();
+
+const menuRoutes = computed(() => meuStore.state.authMenuTreeData);
 
 // const collapse = ref(false);
 const route = useRoute();

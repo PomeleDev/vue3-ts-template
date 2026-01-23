@@ -44,7 +44,7 @@ export const constantRoutes: RouteRecordRaw[] = [
   },
 ];
 
-const asyncRoutes: RouteRecordRaw[] = [
+export const asyncRoutes: RouteRecordRaw[] = [
   {
     path: "/documentation",
     component: Layout,
@@ -135,7 +135,7 @@ const asyncRoutes: RouteRecordRaw[] = [
 ];
 
 // 需要根据用户赋予的权限来动态添加异步路由
-export const routes: RouteRecordRaw[] = [...constantRoutes, ...asyncRoutes];
+export const routes = [...constantRoutes];
 
 export default createRouter({
   history: createWebHistory(), // 路由模式

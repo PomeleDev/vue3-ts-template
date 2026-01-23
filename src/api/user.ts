@@ -14,6 +14,7 @@ export interface Profile {
   roles: IRole[];
   roleIds?: number[]; // 修改用户的时候，后端接受只要id
 }
+
 export interface IUserLoginData {
   username: string;
   password: string;
@@ -65,4 +66,8 @@ export const addUser = (data: Profile): Promise<ApiResponse> => {
 // 编辑用户
 export const updateUser = (id: number, data: Profile): Promise<ApiResponse> => {
   return request.put(`/user/${id}`, data);
+};
+
+export const getUserInfo = (): Promise<ApiResponse<Profile>> => {
+  return request.post("/auth/info");
 };

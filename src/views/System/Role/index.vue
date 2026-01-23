@@ -9,6 +9,7 @@
       <el-table-column prop="is_default" label=" 默认角色" :formatter="formatter" />
       <el-table-column label="操作" fixed="right">
         <template #default="scope">
+          <el-button link @click="handleRoleMenu(scope.row)">菜单权限</el-button>
           <el-button link @click="handleEditRole(scope.row)">编辑</el-button>
           <el-button link @click="handleRemove(scope.row)">删除</el-button>
         </template>
@@ -25,13 +26,25 @@
     <right-panel v-model="visible" :title="panelTitle">
       <editor-role :type="editType" :data="editData" @submit="handleSubmit"></editor-role>
     </right-panel>
+    <role-menu
+      :role="roleData"
+      v-model="roleMenuVisible"
+      v-if="roleMenuVisible && roleData"
+    ></role-menu>
   </div>
 </template>
 <script lang="ts" setup>
 import { IRole } from "@/api/role";
 import { useRoleStore } from "@/stores/role";
-import EditorRole from "./components/editor-role.vue";
 import { useRoleHelpers } from "./roleHelpers";
+const roleData = ref<IRole | null>(null);
+const roleMenuVisible = ref(false);
+const handleRoleMenu = (row: IRole) => {
+  roleMenuVisible.value = true;
+  roleData.value = row;
+};
+
+// --------------------------
 const store = useRoleStore();
 const pageNum = ref(0);
 const pageSize = ref(10);

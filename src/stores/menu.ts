@@ -3,21 +3,28 @@ import {
   MenuData,
   addMenu,
   removeMenuById,
+  updateMenuById,
   updateBulkMenu as updateBulkMenuApi,
 } from "@/api/menu";
-import { generateTree } from "@/utils/generateTree";
+import { getRoleAccessByRoles } from "@/api/roleAccess";
+import { generateTree, ITreeItemDataWithMenuData } from "@/utils/generateTree";
+
 export interface ITreeItemData extends MenuData {
   children?: ITreeItemData[];
 }
 export interface IMenuState {
   menuList: Array<MenuData>;
   menuTreeData: ITreeItemData[];
+  authMenuList: MenuData[];
+  authMenuTreeData: ITreeItemDataWithMenuData[];
 }
 
 export const useMenuStore = defineStore("menu", () => {
   const state = reactive<IMenuState>({
     menuList: [],
     menuTreeData: [],
+    authMenuList: [], // 侧边菜单需要的
+    authMenuTreeData: [],
   });
   const getAllMenuList = async () => {
     const res = await getAllMenus();
@@ -64,6 +71,41 @@ export const useMenuStore = defineStore("menu", () => {
       return true;
     }
   };
+  const updateMenu = async (data: Partial<MenuData>) => {
+    const res = await updateMenuById(Number(data.id), data);
+    if (res.code === 0) {
+      await getAllMenuList();
+      return true;
+    }
+  };
 
-  return { getAllMenuList, state, appendMenu, removeMenu, updateBulkMenu };
+  const getAllMenuListByAdmin = async () => {
+    const res = await getAllMenus();
+    if (res.code == 0) {
+      const { data } = res;
+      state.authMenuList = data;
+      state.authMenuTreeData = generateTree(data, true);
+    }
+  };
+
+  const getMenuListByRoles = async (roles: number[]) => {
+    const res = await getRoleAccessByRoles(roles);
+    if (res.code == 0) {
+      const { data } = res;
+      const access = data.access;
+      state.authMenuList = access;
+      state.authMenuTreeData = generateTree(access, true);
+    }
+  };
+
+  return {
+    getAllMenuList,
+    state,
+    appendMenu,
+    removeMenu,
+    updateBulkMenu,
+    updateMenu,
+    getAllMenuListByAdmin,
+    getMenuListByRoles,
+  };
 });

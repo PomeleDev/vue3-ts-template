@@ -5,9 +5,11 @@ import {
   addUser as addUserApi,
   removeUser as removeUserApi,
   updateUser as updateUserApi,
+  getUserInfo as getUserInfoApi,
 } from "@/api/user";
 import { setToken, removeToken } from "@/utils/auth";
 import { useTagsView } from "./tagsView";
+import { IRole } from "@/api/role";
 
 export type IProfileQuery = Profile & {
   pageNum?: number;
@@ -19,8 +21,18 @@ export const useUserStore = defineStore("user", () => {
     token: "",
     users: [] as IUsers["users"], // 用户列表
     count: 0, // 用户个数
+    roles: [] as IRole[],
+    userInfo: {} as Profile,
   });
   const tagsViewStore = useTagsView();
+  const getUserInfo = async () => {
+    const res = await getUserInfoApi();
+    if (res.code === 0) {
+      const { roles, ...info } = res.data;
+      state.roles = roles;
+      state.userInfo = info as Profile;
+    }
+  };
 
   const login = async (userInfo: IUserLoginData) => {
     try {
@@ -81,5 +93,14 @@ export const useUserStore = defineStore("user", () => {
       });
     }
   };
-  return { login, state, logout, getAllUsers, editUser, removeUser, addUser };
+  return {
+    login,
+    state,
+    logout,
+    getAllUsers,
+    editUser,
+    removeUser,
+    addUser,
+    getUserInfo,
+  };
 });

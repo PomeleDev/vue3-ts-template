@@ -8,6 +8,7 @@
         <el-tree
           :data="menus"
           :props="defaultProps"
+          @node-click="handleNodeClick"
           :expand-on-click-node="false"
           highlight-current
           draggable
@@ -28,6 +29,16 @@
       </div>
     </el-card>
 
+    <el-card class="edit-card">
+      <template #header> 编辑菜单 </template>
+      <editor-menu
+        v-show="editData && editData.id"
+        :data="editData!"
+        @updateEdit="handleUpdateEdit"
+      />
+      <span v-if="editData == null">从菜单列表选择一项后，进行编辑</span>
+    </el-card>
+
     <right-panel v-model="panelVisible" :title="panelTitle" :size="330">
       <add-menu @submit="submitMenuForm"></add-menu>
     </right-panel>
@@ -39,6 +50,14 @@ import { MenuData } from "@/api/menu";
 import { useReloadPage } from "@/hooks/useReloadPage";
 import { ITreeItemData, useMenuStore } from "@/stores/menu";
 import type Node from "element-plus/es/components/tree/src/model/node";
+
+const handleUpdateEdit = async (data: Partial<MenuData>) => {
+  const r = await store.updateMenu(data);
+  if (r) {
+    proxy?.$message.success("菜单编辑成功");
+    reloadPage();
+  }
+};
 
 // 拖拽节点
 const allowDrag = (draggingNode: Node) => {
@@ -143,6 +162,10 @@ const handleRemoveMenu = async (data: MenuData) => {
     proxy?.$message.info("取消菜单");
   }
 };
+const editData = ref({} as MenuData);
+const handleNodeClick = (data: MenuData) => {
+  editData.value = { ...data };
+};
 </script>
 
 <style scoped>
@@ -154,5 +177,8 @@ const handleRemoveMenu = async (data: MenuData) => {
 }
 .custom-item {
   @apply flex items-center justify-between flex-1;
+}
+.edit-card {
+  @apply flex-1 ml-15px;
 }
 </style>
